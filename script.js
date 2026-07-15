@@ -241,14 +241,16 @@
 
   function buildFooter(lang){
     var t = UI[lang] || UI.es;
+    var mailIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M4 7 L12 13 L20 7"/></svg>';
+    var igIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg>';
     return '' +
     '<div class="footer-inner">' +
       '<div class="footer-brand">' +
         '<img src="'+LOGO_WHITE+'" alt="Lemon Tree Arquitectura" width="160" height="42">' +
       '</div>' +
       '<div class="footer-links">' +
-        '<a href="mailto:info@lemontreearquitectura.com">info@lemontreearquitectura.com</a>' +
-        '<a href="https://www.instagram.com/lemontreearquitectura/" target="_blank" rel="noopener">Instagram</a>' +
+        '<a href="mailto:info@lemontreearquitectura.com" class="icon-link" aria-label="Enviar email a info@lemontreearquitectura.com">'+mailIcon+'</a>' +
+        '<a href="https://www.instagram.com/lemontreearquitectura/" target="_blank" rel="noopener" class="icon-link" aria-label="Instagram de Lemon Tree Arquitectura">'+igIcon+'</a>' +
       '</div>' +
       '<div class="footer-legal">' +
         '<a href="/declaracion-de-accesibilidad/">'+t.footerA11y+'</a>' +
