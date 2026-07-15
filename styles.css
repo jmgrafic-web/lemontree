@@ -65,13 +65,28 @@ input,textarea,select{ font: inherit; }
 .eyebrow-light{ color: var(--accent-on-dark); }
 .container{ max-width: var(--container); margin: 0 auto; padding: 0 1.8rem; }
 
-.section-head{ max-width: var(--container); margin: 0 auto 3.6rem; padding: 0 1.8rem; }
-.section-heading{
-  font-family: var(--display); font-weight:600; letter-spacing:-.02em;
-  font-size: clamp(2.2rem, 4.4vw, 3.6rem); line-height:1.06; margin:0 0 1.1rem; max-width: 18ch;
+/* Cabecera de sección: maqueta editorial — el eyebrow se convierte en una regla que
+   recorre todo el ancho, el titular ocupa la columna izquierda (grande, protagonista)
+   y el texto de apoyo se ancla a la derecha, a la misma línea base. Así el espacio a
+   la derecha del titular deja de ser un vacío accidental y pasa a estar resuelto. */
+.section-head{ max-width: var(--container); margin: 0 auto 4.4rem; padding: 0 1.8rem; }
+.section-head .eyebrow, .page-hero .eyebrow{
+  display:flex; align-items:center; gap:1.2rem; margin-bottom: 1.6rem;
 }
-.section-sub{ color: var(--ink-soft); font-size:1.14rem; max-width:56ch; margin:0; }
+.section-head .eyebrow::after, .page-hero .eyebrow::after{ content:""; flex:1 1 auto; height:1px; background: var(--line-strong); }
+.section-head-row{ display:grid; grid-template-columns: 1.35fr 1fr; gap: 3rem; align-items:end; }
+.section-heading{
+  font-family: var(--display); font-weight:600; letter-spacing:-.025em;
+  font-size: clamp(2.4rem, 4.8vw, 4.1rem); line-height:1.04; margin:0; max-width: 14ch;
+}
+.section-sub{ color: var(--ink-soft); font-size:1.14rem; max-width:42ch; margin:0 0 .4rem; }
 .on-dark .section-sub, .section-sub.on-dark{ color: var(--on-dark-soft); }
+
+@media (max-width: 880px){
+  .section-head-row{ grid-template-columns: 1fr; gap: 1.2rem; align-items:start; }
+  .section-heading{ max-width: none; }
+  .section-sub{ max-width: 56ch; }
+}
 
 .btn{
   display:inline-flex; align-items:center; gap:.5rem; padding: .95rem 1.9rem;
@@ -185,6 +200,16 @@ input,textarea,select{ font: inherit; }
 }
 .hero-sub{ font-size: clamp(1.02rem,1.6vw,1.2rem); color: var(--on-dark-soft); max-width: 620px; margin: 0 0 2.3rem; text-shadow: 0 1px 16px rgba(0,0,0,.5); }
 .hero-ctas{ display:flex; gap:1rem; flex-wrap:wrap; }
+.hero-stats{
+  display:flex; gap: 2.6rem; flex-wrap:wrap; margin-top: 3rem;
+  padding-top: 2rem; border-top: 1px solid rgba(245,243,234,.22);
+}
+.hero-stats div{ display:flex; flex-direction:column; gap:.3rem; }
+.hero-stats strong{
+  font-family: var(--display); font-weight:600; font-size: clamp(1.6rem,2.4vw,2.1rem);
+  color: var(--on-dark); letter-spacing:-.02em;
+}
+.hero-stats span{ font-size:.84rem; color: var(--on-dark-soft); max-width:16ch; }
 .scroll-cue{
   position:absolute; right: 1.8rem; bottom: 2.2rem; z-index:1;
   width:1px; height:50px; background: rgba(245,243,234,.35);
@@ -198,12 +223,12 @@ input,textarea,select{ font: inherit; }
   .hero-title{ font-size: clamp(2.1rem, 9vw, 2.7rem); max-width: none; }
   .hero-sub{ font-size: .98rem; }
   .scroll-cue{ display:none; }
+  .hero-stats{ gap: 1.6rem; margin-top: 2.2rem; padding-top: 1.6rem; }
 }
 
 /* ---------------- Page hero (páginas internas) ---------------- */
 .page-hero{ max-width: var(--container); margin: 0 auto; padding: 11rem 1.8rem 5rem; }
-.page-hero .section-heading{ font-size: clamp(2.6rem,5.6vw,4.2rem); }
-.page-hero .section-sub{ max-width: 62ch; }
+.page-hero .section-heading{ font-size: clamp(2.6rem,5.6vw,4.4rem); }
 
 /* ---------------- Intro / manifesto ---------------- */
 .intro{ padding: 8rem 1.8rem; }
@@ -226,7 +251,7 @@ input,textarea,select{ font: inherit; }
 .service-teaser-item img{ width:100%; aspect-ratio: 4/3; object-fit:cover; display:block; margin-bottom: 1.2rem; }
 .service-teaser-item h3{ font-family: var(--display); font-weight:600; font-size:1.2rem; margin:0 0 .5rem; letter-spacing:-.01em; }
 .service-teaser-item p{ color: var(--ink-soft); font-size:.95rem; margin:0; }
-.services-cta{ max-width: var(--container); margin: 3.5rem auto 0; padding: 0 1.8rem; text-align:center; }
+.services-cta{ max-width: var(--container); margin: 3.5rem auto 0; padding: 0 1.8rem; text-align:left; }
 @media (max-width: 700px){ .service-teaser{ grid-template-columns:1fr; } }
 
 .cta-banner{ background: var(--paper-dark); padding: 7rem 1.8rem; }
@@ -253,20 +278,6 @@ input,textarea,select{ font: inherit; }
   .service-feature{ grid-template-columns:1fr; gap:1.8rem; padding: 3.2rem 1.8rem; }
   .service-feature-media, .service-feature.reverse .service-feature-media{ order:1; }
   .service-feature-text, .service-feature.reverse .service-feature-text{ order:2; }
-}
-
-/* Centrado en escritorio de titulares/textos/botones (todas las secciones excepto Contacto,
-   que no usa .section-head / .page-hero y por tanto queda excluida de forma natural) */
-@media (min-width: 881px){
-  .section-head{ text-align:center; max-width: var(--container-narrow); }
-  .section-head .section-sub{ margin-left:auto; margin-right:auto; }
-  .page-hero{ text-align:center; max-width: var(--container-narrow); }
-  .page-hero .section-sub{ margin-left:auto; margin-right:auto; }
-  .hero-inner{ text-align:center; }
-  .hero-title{ margin-left:auto; margin-right:auto; }
-  .hero-sub{ margin-left:auto; margin-right:auto; }
-  .hero-ctas{ justify-content:center; }
-  .credentials{ justify-content:center; text-align:left; }
 }
 
 /* ---------------- Proyectos: SIN cajas, imagen a sangre ---------------- */
@@ -315,7 +326,7 @@ input,textarea,select{ font: inherit; }
 .featured-grid .project-media{ aspect-ratio: 4/3.1; }
 @media (max-width: 760px){ .featured-grid{ grid-template-columns:1fr; } }
 
-.view-all{ max-width: var(--container); margin: 3rem auto 0; padding: 0 1.8rem; text-align:center; }
+.view-all{ max-width: var(--container); margin: 3rem auto 0; padding: 0 1.8rem; text-align:left; }
 
 @media (max-width: 620px){
   .featured-lead{ aspect-ratio: 4/3.4; }
@@ -337,8 +348,9 @@ input,textarea,select{ font: inherit; }
 .partners h3{ font-family: var(--display); font-weight:600; font-size:1.35rem; margin:0 0 .9rem; }
 .partners p{ color: var(--ink-soft); margin:0; max-width:60ch; }
 
-.credentials{ max-width: var(--container-narrow); margin: 0 auto 3rem; display:flex; gap:2.4rem; flex-wrap:wrap; }
+.credentials{ max-width: var(--container); margin: 0 auto 3rem; padding: 0 1.8rem; display:flex; gap:3.2rem; flex-wrap:wrap; }
 .credentials div{ font-family: var(--sans); }
+.credentials strong{ font-size:1.02rem; }
 .credentials span{ display:block; font-family: var(--mono); font-size:.68rem; letter-spacing:.08em; text-transform:uppercase; color: var(--ink-faint); margin-bottom:.35rem; }
 
 /* ---------------- Project detail ---------------- */
