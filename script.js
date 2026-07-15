@@ -717,6 +717,91 @@
   }
 
   /* ------------------------------------------------------------------ *
+   * 8b. HERO SLIDER — autoplay cada 10s + arrastre manual (solo home)
+   * ------------------------------------------------------------------ */
+  function initHeroSlider(){
+    var track = document.getElementById("heroTrack");
+    var dotsRoot = document.getElementById("heroDots");
+    if(!track || !dotsRoot) return;
+
+    var slides = Array.prototype.slice.call(track.children);
+    var count = slides.length;
+    var index = 0;
+    var dragging = false, startX = 0, startTranslate = 0, currentTranslate = 0;
+    var autoplayTimer = null;
+
+    function frameWidth(){ return track.getBoundingClientRect().width; }
+
+    var dots = slides.map(function(_, i){
+      var b = document.createElement("button");
+      b.type = "button";
+      b.setAttribute("aria-label", "Ir a la imagen " + (i + 1));
+      b.addEventListener("click", function(){ goTo(i); restartAutoplay(); });
+      dotsRoot.appendChild(b);
+      return b;
+    });
+
+    function updateDots(){
+      dots.forEach(function(d, i){ d.classList.toggle("is-active", i === index); });
+    }
+
+    function goTo(i, animate){
+      index = (i + count) % count;
+      currentTranslate = -index * frameWidth();
+      track.style.transition = (animate === false) ? "none" : "transform .7s cubic-bezier(.22,.61,.36,1)";
+      track.style.transform = "translateX(" + currentTranslate + "px)";
+      updateDots();
+    }
+    function next(){ goTo(index + 1); }
+
+    function startAutoplay(){
+      if(reduceMotion) return;
+      stopAutoplay();
+      autoplayTimer = setInterval(next, 10000);
+    }
+    function stopAutoplay(){ if(autoplayTimer){ clearInterval(autoplayTimer); autoplayTimer = null; } }
+    function restartAutoplay(){ startAutoplay(); }
+
+    // arrastre con Pointer Events (funciona con ratón y con el dedo)
+    track.addEventListener("pointerdown", function(e){
+      dragging = true;
+      track.classList.add("is-dragging");
+      startX = e.clientX;
+      startTranslate = -index * frameWidth();
+      track.style.transition = "none";
+      stopAutoplay();
+      try{ track.setPointerCapture(e.pointerId); }catch(err){}
+    });
+    track.addEventListener("pointermove", function(e){
+      if(!dragging) return;
+      var dx = e.clientX - startX;
+      currentTranslate = startTranslate + dx;
+      track.style.transform = "translateX(" + currentTranslate + "px)";
+    });
+    function endDrag(){
+      if(!dragging) return;
+      dragging = false;
+      track.classList.remove("is-dragging");
+      var dx = currentTranslate - startTranslate;
+      var threshold = frameWidth() * 0.12;
+      if(dx < -threshold) goTo(index + 1);
+      else if(dx > threshold) goTo(index - 1);
+      else goTo(index);
+      restartAutoplay();
+    }
+    track.addEventListener("pointerup", endDrag);
+    track.addEventListener("pointercancel", endDrag);
+    track.addEventListener("pointerleave", function(){ if(dragging) endDrag(); });
+    track.addEventListener("mouseenter", stopAutoplay);
+    track.addEventListener("mouseleave", function(){ if(!dragging) restartAutoplay(); });
+
+    window.addEventListener("resize", function(){ goTo(index, false); });
+
+    goTo(0, false);
+    startAutoplay();
+  }
+
+  /* ------------------------------------------------------------------ *
    * 9. Header scroll state
    * ------------------------------------------------------------------ */
   function onHeaderScroll(){
@@ -737,7 +822,7 @@
    * ------------------------------------------------------------------ */
   var io;
   function initReveal(){
-    document.querySelectorAll(".section-head, .service-card, .project-row, .timeline-item, .intro-inner, .contact-grid, .pd-desc, .credentials")
+    document.querySelectorAll(".section-head, .service-feature, .service-teaser-item, .project-row, .timeline-item, .intro-inner, .contact-grid, .pd-desc, .credentials")
       .forEach(function(el){ el.classList.add("reveal"); });
     if(!("IntersectionObserver" in window)){
       document.querySelectorAll(".reveal").forEach(function(el){ el.classList.add("is-visible"); });
@@ -777,5 +862,6 @@
   try{ savedLang = localStorage.getItem("ltq_lang") || "es"; }catch(e){}
   applyLanguage(savedLang);
   onHeaderScroll();
+  initHeroSlider();
 
 })();
