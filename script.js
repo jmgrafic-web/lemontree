@@ -306,7 +306,6 @@
     "hero.title": "Arquitectura amb identitat,<br>des de Barcelona",
     "hero.sub": "Dissenyem i executem reformes integrals, interiorisme, obra nova i espais comercials a Barcelona, acompanyant cada projecte des de la cerca de l'immoble fins a la direcció d'obra.",
     "hero.ctaProjects": "Veure projectes", "hero.ctaContact": "Parlem del teu projecte",
-    "hero.statYears": "Anys de trajectòria", "hero.statProjects": "Projectes realitzats", "hero.statCountries": "Països: Espanya i Perú",
     "intro.eyebrow": "L'estudi", "intro.heading": "Cada espai explica una història",
     "intro.p1": "A <strong>Lemon Tree Estudi</strong> creiem que l'arquitectura i l'interiorisme han de respondre a qui habita l'espai. Amb seu a Barcelona, treballem reformes integrals, interiorisme i obra nova amb un enfocament a mida.",
     "intro.p2": "Oferim un servei integral: acompanyem cada projecte des de la cerca de l'immoble fins a l'execució de l'obra, incloent-hi la direcció tècnica i la selecció de materials.",
@@ -325,7 +324,6 @@
     "hero.title": "Architecture with identity,<br>from Barcelona",
     "hero.sub": "We design and deliver full renovations, interior design, new-build homes and commercial spaces in Barcelona, guiding every project from the property search through to site management.",
     "hero.ctaProjects": "View projects", "hero.ctaContact": "Talk about your project",
-    "hero.statYears": "Years of experience", "hero.statProjects": "Completed projects", "hero.statCountries": "Countries: Spain and Peru",
     "intro.eyebrow": "The studio", "intro.heading": "Every space tells a story",
     "intro.p1": "At <strong>Lemon Tree Estudio</strong> we believe architecture and interior design should respond to the people who live in a space. Based in Barcelona, we work on full renovations, interior design and new-build projects with a tailored approach.",
     "intro.p2": "We offer a complete service, accompanying every project from the property search through to construction, including technical direction and material selection.",
@@ -826,7 +824,7 @@
    * ------------------------------------------------------------------ */
   var io;
   function initReveal(){
-    document.querySelectorAll(".section-head, .service-feature, .service-teaser-item, .project-row, .timeline-item, .intro-inner, .contact-grid, .pd-desc, .credentials")
+    document.querySelectorAll(".section-head, .service-card, .project-row, .timeline-item, .intro-inner, .contact-grid, .pd-desc, .credentials")
       .forEach(function(el){ el.classList.add("reveal"); });
     if(!("IntersectionObserver" in window)){
       document.querySelectorAll(".reveal").forEach(function(el){ el.classList.add("is-visible"); });
