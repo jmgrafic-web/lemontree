@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-i18n="meta.title">Contacto | Lemon Tree Arquitectura Barcelona</title>
+<meta name="description" data-i18n="meta.description" content="Habla con Lemon Tree Arquitectura sobre tu proyecto de reforma, obra nueva o interiorismo en Barcelona.">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<link rel="canonical" href="https://lemontreearquitectura.com/contacto/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23111008'/%3E%3Cpath d='M20 75 L20 30 L50 15 L80 30 L80 75 M35 75 L35 45 L65 45 L65 75' stroke='%23CBD861' stroke-width='6' fill='none'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="contacto">
+
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+<header class="site-header" id="siteHeader"></header>
+
+<main id="contenido">
+  <section class="contact" style="padding-top:11rem;">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <p class="eyebrow eyebrow-light" data-i18n="page.eyebrow">Contacto</p>
+        <h1 class="section-heading" style="color:var(--on-dark)" data-i18n="page.heading">Hablemos de tu proyecto</h1>
+        <p class="section-sub on-dark" data-i18n="page.sub">Cuéntanos tu idea y te ayudamos a darle forma: desde la primera visita hasta la última llave entregada.</p>
+        <a class="contact-email" href="mailto:info@lemontreearquitectura.com">info@lemontreearquitectura.com</a>
+        <div class="contact-meta">
+          <div><span data-i18n="locationLabel">Ubicación</span><p data-i18n="location">Barcelona, España</p></div>
+          <div><span data-i18n="socialLabel">Redes</span><p><a href="https://www.instagram.com/lemontreearquitectura/" target="_blank" rel="noopener">Instagram</a></p></div>
+        </div>
+      </div>
+
+      <form class="contact-form" id="contactForm" novalidate>
+        <div class="field">
+          <label for="f-name" data-i18n="form.name">Nombre</label>
+          <input type="text" id="f-name" name="name" required>
+        </div>
+        <div class="field">
+          <label for="f-email" data-i18n="form.email">Email</label>
+          <input type="email" id="f-email" name="email" required>
+        </div>
+        <div class="field">
+          <label for="f-phone" data-i18n="form.phone">Teléfono (opcional)</label>
+          <input type="tel" id="f-phone" name="phone">
+        </div>
+        <div class="field">
+          <label for="f-type" data-i18n="form.type">Tipo de proyecto</label>
+          <select id="f-type" name="type">
+            <option data-i18n="form.type1">Reforma integral</option>
+            <option data-i18n="form.type2">Obra nueva</option>
+            <option data-i18n="form.type3">Interiorismo</option>
+            <option data-i18n="form.type4">Retail y oficinas</option>
+            <option data-i18n="form.type5">Inversión inmobiliaria</option>
+          </select>
+        </div>
+        <div class="field field-full">
+          <label for="f-message" data-i18n="form.message">Cuéntanos tu proyecto</label>
+          <textarea id="f-message" name="message" rows="4" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary on-dark field-full" data-i18n="form.submit">Enviar mensaje</button>
+        <p class="form-note" data-i18n="form.note">Al enviar se abrirá tu gestor de correo con el mensaje ya redactado.</p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer" id="siteFooter"></footer>
+<script src="script.js"></script>
+</body>
+</html>
